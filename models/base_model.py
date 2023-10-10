@@ -31,7 +31,7 @@ class BaseModel:
     def save(self):
         """update update_at attribute with current datetime"""
         self.updated_at = datetime.now()
-        
+
         # Save the objects to the JSON file
         models.storage.save()
 
