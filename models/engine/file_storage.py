@@ -1,14 +1,13 @@
 #!/usr/bin/python3
-""""""
+"""File Storage module"""
 import json
 import os
 import sys
-
 from models.base_model import BaseModel
 
 
 class FileStorage:
-    """"""
+    """FileStorage class."""
 
     __file_path = "file.json"
     __objects = {}
@@ -27,7 +26,7 @@ class FileStorage:
         """Serializes __objects to the JSON file"""
         obj_dict = {}
         for key, value in FileStorage.__objects.items():
-            obj_dict[key] = value
+            obj_dict[key] = value.to_dict()
 
         with open(FileStorage.__file_path, "w") as file:
             json.dump(obj_dict, file, indent=2)

@@ -2,6 +2,7 @@
 """This is a module for BaseModel class for AirBnB"""
 import uuid
 from datetime import datetime
+import models
 
 
 class BaseModel:
@@ -20,6 +21,9 @@ class BaseModel:
             self.created_at = datetime.now()
             self.updated_at = datetime.now()
 
+            # Add the object to the storage
+            models.storage.new(self)
+
     def __str__(self):
         """str method of the class"""
         return f"[{self.__class__.__name__}] ({self.id}) {self.__dict__}"
@@ -27,6 +31,9 @@ class BaseModel:
     def save(self):
         """update update_at attribute with current datetime"""
         self.updated_at = datetime.now()
+        
+        # Save the objects to the JSON file
+        models.storage.save()
 
     def to_dict(self):
         """returns a dictionary containing all keys/value of the instance"""
