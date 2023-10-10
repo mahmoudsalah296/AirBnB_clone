@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""This is a module for BaseModel class for AirBnB00"""
+"""This is a module for BaseModel class for AirBnB"""
 import uuid
 from datetime import datetime
 
