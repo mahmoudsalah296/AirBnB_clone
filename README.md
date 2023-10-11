@@ -1,7 +1,7 @@
 # AirBnB clone - The console
 
 <p align="center">
-  <img src="airBnB.png" alt="airBnB">
+  <img src="airBnB.png" alt="airBnB" width="40%">
 </p>
 
 
