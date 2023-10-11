@@ -6,6 +6,7 @@
 import cmd
 from models import storage
 from models.base_model import BaseModel
+from models.user import User
 
 
 class HBNBCommand(cmd.Cmd):
@@ -39,12 +40,13 @@ class HBNBCommand(cmd.Cmd):
         and prints the id"""
         if not class_name or class_name == "":
             print("** class name missing **")
-        elif class_name not in ("BaseModel",):
-            print("** class doesn't exist **")
         else:
-            new_instance = BaseModel()
-            new_instance.save()
-            print(new_instance.id)
+            try:
+                new_instance = globals()[class_name]()
+                new_instance.save()
+                print(new_instance.id)
+            except KeyError:
+                print("** class doesn't exist **")
 
     def do_show(self, line):
         """Prints the string representation of an instance
@@ -53,7 +55,7 @@ class HBNBCommand(cmd.Cmd):
         args = line.split()
         if len(args) == 0:
             print("** class name missing **")
-        elif args[0] not in ("BaseModel",):
+        elif args[0] not in self.unpacking_storage():
             print("** class doesn't exist **")
         elif len(args) < 2:
             print("** instance id missing **")
@@ -65,7 +67,7 @@ class HBNBCommand(cmd.Cmd):
                     print(all_obj[obj_id])
                     flag = True
                     break
-            if flag == False:
+            if flag is False:
                 print("** no instance found **")
 
     def unpacking_storage(self):
