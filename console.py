@@ -4,6 +4,10 @@
     from which we can update, delete, add and show users
 """
 import cmd
+import os
+import sys
+import platform
+
 from models.base_model import BaseModel
 from models import storage
 from models.base_model import BaseModel
@@ -135,6 +139,62 @@ class HBNBCommand(cmd.Cmd):
 
         if all_instances:
             print(all_instances)
+
+    def do_update(self, arg):
+        """Updates an instance based on the class name and id
+        by adding or updating attribute
+        """
+        # update <class name> <id> <attribute name> "<attribute value>"
+        args = arg.split()
+
+        if not args:
+            print("** class name missing **")
+            return
+
+        # Unpacking storage to classes name.
+        all_classes = self.unpacking_storage()
+        if args[0] not in all_classes:
+            print("** class doesn't exist **")
+            return
+
+        if len(args) < 2:  # if no id entered
+            print("** instance id missing **")
+            return
+
+        key = f"{args[0]}.{args[1]}"
+        all_objects = storage.all()
+        if key not in all_objects:
+            print("** no instance found **")
+            return
+
+        if len(args) < 3:
+            print("** attribute name missing **")
+            return
+
+        if len(args) < 4:
+            print("** value missing **")
+            return
+
+        # If user entered all arguments
+        value_obj = all_objects[key]
+        attr_name = args[2]
+        attr_value = args[3]
+
+        # Check if the attribute exists in the object's class definition
+        # Or attribute name doesn't exist, add it to the object
+        setattr(value_obj, attr_name, attr_value)
+        storage.save()
+
+    def do_clear(self, arg):
+        """Clear the screen"""
+        if platform.system() == 'Windows':
+            os.system('cls')
+        else:
+            os.system('clear')
+
+    def do_ls(self, arg):
+        """Display the storage instances name"""
+        print(self.unpacking_storage())
 
 
 if __name__ == "__main__":
