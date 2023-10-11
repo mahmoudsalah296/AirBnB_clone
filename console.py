@@ -6,6 +6,7 @@
 import cmd
 from models.base_model import BaseModel
 from models import storage
+from models.base_model import BaseModel
 
 
 class HBNBCommand(cmd.Cmd):
@@ -99,6 +100,40 @@ class HBNBCommand(cmd.Cmd):
             storage.save()
         else:
             print("** no instance found **")
+
+    def do_all(self, arg):
+        """Prints all string representation of all instances
+        based or not on the class name.
+        """
+        args = arg.split()
+        all_instances = []
+
+        # $ all
+        if not arg:
+            for value in storage.all().values():
+                all_instances.append(str(value))
+            print(all_instances)
+            return
+
+        # Unpacking all storage date to classes name.
+        all_objects = storage.all()  # all keys
+        all_classes = []  # # contains all classes name
+
+        for key in all_objects.keys():
+            class_name, class_id = key.split(".")
+            all_classes.append(class_name)
+
+        if args[0] not in all_classes:
+            print("** class doesn't exist **")
+            return
+
+        # $ all BaseModel
+        for key, value in storage.all().items():
+            if key.startswith(f"{args[0]}."):
+                all_instances.append(str(value))
+
+        if all_instances:
+            print(all_instances)
 
 
 if __name__ == "__main__":
