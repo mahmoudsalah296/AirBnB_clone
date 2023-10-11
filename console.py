@@ -5,10 +5,7 @@
 """
 import cmd
 import os
-import sys
 import platform
-
-from models.base_model import BaseModel
 from models import storage
 from models.base_model import BaseModel
 
