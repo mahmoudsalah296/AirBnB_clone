@@ -69,6 +69,17 @@ class HBNBCommand(cmd.Cmd):
             if flag == False:
                 print("** no instance found **")
 
+    def unpacking_storage(self):
+        """Unpacking storage to classes name"""
+        all_objects = storage.all()  # all keys
+        all_classes = []  # contains all classes name
+
+        for key in all_objects.keys():
+            class_name, class_id = key.split(".")
+            all_classes.append(class_name)
+
+        return all_classes
+
     def do_destroy(self, arg):
         """Deletes an instance based on the class name and id"""
         # $ destroy BaseModel 1234-1234-1234
@@ -79,12 +90,7 @@ class HBNBCommand(cmd.Cmd):
             return
 
         # Unpacking all storage date to classes name.
-        all_objects = storage.all()  # all keys
-        all_classes = []  # # contains all classes name
-
-        for key in all_objects.keys():
-            class_name, class_id = key.split(".")
-            all_classes.append(class_name)
+        all_classes = self.unpacking_storage()
 
         if args[0] not in all_classes:
             print("** class doesn't exist **")
@@ -116,12 +122,7 @@ class HBNBCommand(cmd.Cmd):
             return
 
         # Unpacking all storage date to classes name.
-        all_objects = storage.all()  # all keys
-        all_classes = []  # # contains all classes name
-
-        for key in all_objects.keys():
-            class_name, class_id = key.split(".")
-            all_classes.append(class_name)
+        all_classes = self.unpacking_storage()
 
         if args[0] not in all_classes:
             print("** class doesn't exist **")
