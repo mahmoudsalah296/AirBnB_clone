@@ -4,8 +4,6 @@
     from which we can update, delete, add and show users
 """
 import cmd
-import os
-import platform
 from models import storage
 from models.base_model import BaseModel
 
