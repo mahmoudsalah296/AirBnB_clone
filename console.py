@@ -182,13 +182,6 @@ class HBNBCommand(cmd.Cmd):
         setattr(value_obj, attr_name, attr_value)
         storage.save()
 
-    def do_clear(self, arg):
-        """Clear the screen"""
-        if platform.system() == 'Windows':
-            os.system('cls')
-        else:
-            os.system('clear')
-
     def do_ls(self, arg):
         """Display the storage instances name"""
         print(self.unpacking_storage())
