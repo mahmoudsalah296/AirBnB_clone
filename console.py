@@ -7,6 +7,11 @@ import cmd
 from models import storage
 from models.base_model import BaseModel
 from models.user import User
+from models.city import City
+from models.state import State
+from models.amenity import Amenity
+from models.place import Place
+from models.review import Review
 
 
 class HBNBCommand(cmd.Cmd):
@@ -114,6 +119,7 @@ class HBNBCommand(cmd.Cmd):
         """
         args = arg.split()
         all_instances = []
+        # print(args)
 
         # $ all
         if not arg:
@@ -122,16 +128,22 @@ class HBNBCommand(cmd.Cmd):
             print(all_instances)
             return
 
+        # Checks if user entered '<class name>.all()'
+        if len(args) == 1:
+            class_name = arg
+        else:
+            class_name = args[1]
+
         # Unpacking all storage date to classes name.
         all_classes = self.unpacking_storage()
 
-        if args[0] not in all_classes:
+        if class_name not in all_classes:
             print("** class doesn't exist **")
             return
 
         # $ all BaseModel
         for key, value in storage.all().items():
-            if key.startswith(f"{args[0]}."):
+            if key.startswith(f"{class_name}."):
                 all_instances.append(str(value))
 
         if all_instances:
@@ -143,6 +155,7 @@ class HBNBCommand(cmd.Cmd):
         """
         # update <class name> <id> <attribute name> "<attribute value>"
         args = arg.split()
+        # print(*args)
 
         if not args:
             print("** class name missing **")
@@ -185,6 +198,50 @@ class HBNBCommand(cmd.Cmd):
     def do_ls(self, arg):
         """Display the storage instances name"""
         print(self.unpacking_storage())
+
+    def default(self, line):
+        """Method called on an input line when the command prefix is not recognized.
+        If this method is not overridden, it prints an error message and returns.
+        """
+        args = line.split(".")
+        class_name = args[0]
+
+        if len(args) >= 2 and args[1] == "all()":
+            self.do_all(class_name)
+        elif len(args) >= 2 and args[1] == "count()":
+            print(self.unpacking_storage().count(class_name))
+        elif len(args) >= 2 and (args[1].startswith("show(") or
+                                 args[1].startswith("destroy(")):
+            func_body = args[1].split('(')
+            # print(func_body)
+            class_id = func_body[1][1:-2]
+            # print(class_id)
+            if args[1].startswith("show("):
+                self.do_show(f"{class_name} {class_id}")
+            else:
+                self.do_destroy(f"{class_name} {class_id}")
+        elif len(args) >= 2 and args[1].startswith("update("):
+            func_body = args[1].split(')')
+            # print(func_body)
+            func_content = func_body[0].split("(")
+            # print(func_content)
+            attributes_list = func_content[1].split(",")
+            # print(attributes_list)
+
+            class_id = attributes_list[0][1:-1]
+            attribute_name = attributes_list[1][2:-1]
+            attribute_value = attributes_list[2]
+            # print(attribute_value)
+            # print(type(attribute_value))
+            try:
+                attribute_value = int(attribute_value)
+            except ValueError:
+                attribute_value = attributes_list[2][2:-1]
+            # print (type(attribute_value))
+            # print(class_name, class_id, attribute_name, attribute_value)
+            self.do_update(f"{class_name} {class_id} {attribute_name} {attribute_value}")
+        else:
+            print("*** Unknown syntax: {line}")
 
 
 if __name__ == "__main__":

@@ -28,7 +28,8 @@ interpreter (`cmd` module) to manipulate our storage engine.
   git clone https://github.com/mahmoudsalah296/AirBnB_clone.git
   ```
 
-- Run the `console.py` file (note: you have to be in the same directory as the `console.py` file and have python3 installed)
+- Run the `console.py` file
+ (*note: you have to be in the same directory as the `console.py` file and have python3 installed*)
   ```bash
   python3 console.py
   ```
@@ -40,26 +41,41 @@ interpreter (`cmd` module) to manipulate our storage engine.
 - Available commands:  
   - **create**: creates an object of the class name.
      ```bash
-     $ create BaseModel
+     $ create <class name>
      ```
   - **show**: shows the object of the class name with the id.
      ```bash
-     $ show BaseModel 1234-1234-1234
+    # There are 2 ways to do that
+    
+     $ show <class name> <class id>
+     $ <class name>.show(<class id>)
      ```
   - **destroy**: destroys the object of the class name with the id.
      ```bash
-     $ destroy BaseModel 1234-1234-1234
+     # There are 2 ways to do that
+    
+     $ destroy <class name> <clas id>
+     $ <class name>.destroy(<class id>)
      ```
   - **all** - shows all objects of the class name.
      ```bash
-     $ all BaseModel
+     # There are many ways to do that
+     
      $ all  # If you want show all instances.
+     $ all <class name>
+     $ <class name>.all()
      ```
   - **update**: Updates an instance based on the class name and `id` by adding or updating attribute.
      ```bash
-     $ update BaseModel 1234-1234-1234 email "aibnb@mail.com"
+     # There are 2 ways to do that
+    
+     $ update <class name> <class id> <attribute name> "<attribute value>"
+     $ <class name>.update(<id>, <attribute name>, <attribute value>)
      ```
-  
+  - **count** - retrieve the number of instances of a class.
+    ```bash
+     <class name>.count()
+    ```
   - **quit** or **EOF** - exits the console  
   
   - **ls** - lists all classes names  
