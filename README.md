@@ -30,7 +30,7 @@ interpreter (`cmd` module) to manipulate our storage engine.
 
 - Run the `console.py` file (note: you have to be in the same directory as the `console.py` file and have python3 installed)
   ```bash
-  python3 console,py
+  python3 console.py
   ```
 
 - Now you can use the console to *create*, *update*, *destroy*, *show*, and all other CRUD operations on our objects.
