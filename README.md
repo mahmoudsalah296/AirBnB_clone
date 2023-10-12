@@ -33,7 +33,7 @@ This is the first step towards building our first full web application: the **Ai
 - every time you create an object, it will be saved in a json file in the models directory called file.json
 
 - available commands:  
-  1.**create** {class name} - creates an object of the class name
+  1. **create** {class name} - creates an object of the class name
   2. **show** {class name} {id} - shows the object of the class name with the id
   3. **destroy** {class name} {id} - destroys the object of the class name with the id
   4. **all** {class name} - shows all objects of the class name
