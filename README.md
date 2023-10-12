@@ -37,28 +37,31 @@ interpreter (`cmd` module) to manipulate our storage engine.
 
 - Every time you create an object, it will be saved in a json file in the models directory called `file.json`
 
-- available commands:  
-  1. **create**: creates an object of the class name.
+- Available commands:  
+  - **create**: creates an object of the class name.
      ```bash
      $ create BaseModel
      ```
-  2. **show**: shows the object of the class name with the id.
+  - **show**: shows the object of the class name with the id.
      ```bash
      $ show BaseModel 1234-1234-1234
      ```
-  3. **destroy**: destroys the object of the class name with the id.
+  - **destroy**: destroys the object of the class name with the id.
      ```bash
      $ destroy BaseModel 1234-1234-1234
      ```
-  4. **all**shows all objects of the class name.
+  - **all** - shows all objects of the class name.
      ```bash
      $ all BaseModel
      $ all  # If you want show all instances.
      ```
-  5. **update**: Updates an instance based on the class name and `id` by adding or updating attribute.
+  - **update**: Updates an instance based on the class name and `id` by adding or updating attribute.
      ```bash
      $ update BaseModel 1234-1234-1234 email "aibnb@mail.com"
      ```
-  6. **quit** or **EOF** - exits the console  
-  7. **ls** - lists all classes names  
-  8. **help** or **?** - shows the help message  
+  
+  - **quit** or **EOF** - exits the console  
+  
+  - **ls** - lists all classes names  
+  
+  - **help** or **?** - shows the help message  
