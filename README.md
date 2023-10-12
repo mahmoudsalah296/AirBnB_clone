@@ -5,44 +5,40 @@
 </p>
 
 
-## Background Context
 ### Welcome to the AirBnB clone project!
 
-#### First step: Write a command interpreter to manage your AirBnB objects.
-This is the first step towards building your first full web application: the **AirBnB clone**.
-This first step is very important because you will use what you build during this project with all other following
-projects: HTML/CSS templating, database storage, API, front-end integration…
+#### First step: a command interpreter to manage our AirBnB objects.
+This is the first step towards building our first full web application: the **AirBnB clone**.
 
-Each task is linked and will help you to:
 
-- put in place a parent class (called `BaseModel`) to take care of the initialization, serialization and deserialization
-of your future instances
-- create a simple flow of serialization/deserialization: Instance <-> Dictionary <-> JSON string <-> file
-- create all classes used for AirBnB (`User`, `State`, `City`, `Place`…) that inherit from `BaseModel`
-- create the first abstracted storage engine of the project: File storage.
-- create all unittests to validate all our classes and storage engine
+- first we created a BaseModel class that defines all common attributes/methods for other classes, and takes care of the initialization, serialization and deserialization of your future instances
 
-### General
-- How to create a Python package
-- How to create a command interpreter in Python using the `cmd` module
-- What is Unit testing and how to implement it in a large project
-- How to serialize and deserialize a Class
-- How to write and read a JSON file
-- How to manage `datetime`
-- What is an `UUID`
-- What is `*args` and how to use it
-- What is `**kwargs` and how to use it
-- How to handle named arguments in a function
+- we created a simple flow of serialization/deserialization: Instance <-> Dictionary <-> JSON string <-> file
 
-### Resources
-Read or watch:
+- then we created all classes used for AirBnB (User, State, City, Place…) that inherit from BaseModel
 
-- [cmd module](https://docs.python.org/3.8/library/cmd.html)
-- [cmd module in depth](http://pymotw.com/2/cmd/)
-- [uuid module](https://docs.python.org/3.8/library/uuid.html)
-- [datetime](https://docs.python.org/3.8/library/datetime.html)
-- [unittest module](https://docs.python.org/3.8/library/unittest.html#module-unittest)
-- [args/kwargs](https://yasoob.me/2013/08/04/args-and-kwargs-in-python-explained/)
-- [Python test cheatsheet](https://www.pythonsheets.com/notes/python-tests.html)
-- [cmd module wiki page](https://wiki.python.org/moin/CmdModule)
-- [python unittest](https://realpython.com/python-testing/)
+- in this first stip we used json files as our storage engine
+
+- because until now we don't have a GUI, we used the console / command interpreter (cmd module) to manipulate our storage engine
+
+#### How to start it
+
+- first clone the repository to your local machine
+
+- then run the console.py file (note that: you have to be in the same directory as the console.py file and have python3 installed)
+
+- now you can use the console to create, update, destroy, show, and all other CRUD operations on our objects
+  exaplme: create User, create State, show User, destroy User, update User, all User, all State, etc...
+
+- every time you create an object, it will be saved in a json file in the models directory called file.json
+
+- available commands:
+  1.**create** {class name} - creates an object of the class name
+  2. **show** {class name} {id} - shows the object of the class name with the id
+  3. **destroy** {class name} {id} - destroys the object of the class name with the id
+  4. **all** {class name} - shows all objects of the class name
+  5. **update** {class name} {id} {attribute name} "{attribute value}"
+      updates the attribute of the object of the class name with the id
+  6. **quit** or **EOF** - exits the console
+  7. **ls** - lists all classes names
+  8. **help** or **?** - shows the help message
