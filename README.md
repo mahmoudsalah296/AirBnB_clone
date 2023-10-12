@@ -33,12 +33,12 @@ This is the first step towards building our first full web application: the **Ai
 - every time you create an object, it will be saved in a json file in the models directory called file.json
 
 - available commands:  
-  1. **create** {class name} - creates an object of the class name
-  2. **show** {class name} {id} - shows the object of the class name with the id
-  3. **destroy** {class name} {id} - destroys the object of the class name with the id
-  4. **all** {class name} - shows all objects of the class name
-  5. **update** {class name} {id} {attribute name} "{attribute value}"
-      updates the attribute of the object of the class name with the id
-  6. **quit** or **EOF** - exits the console
-  7. **ls** - lists all classes names
-  8. **help** or **?** - shows the help message
+  1. **create** {class name} - creates an object of the class name  
+  2. **show** {class name} {id} - shows the object of the class name with the id  
+  3. **destroy** {class name} {id} - destroys the object of the class name with the id  
+  4. **all** {class name} - shows all objects of the class name  
+  5. **update** {class name} {id} {attribute name} "{attribute value}"  
+      updates the attribute of the object of the class name with the id  
+  6. **quit** or **EOF** - exits the console  
+  7. **ls** - lists all classes names  
+  8. **help** or **?** - shows the help message  
