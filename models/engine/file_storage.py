@@ -47,7 +47,8 @@ class FileStorage:
                     class_name, class_id = key.split(".")
 
                     # Dynamically create an instance of the corresponding class
-                    class_instance = getattr(sys.modules[__name__], class_name, None)
+                    class_instance = getattr(sys.modules[__name__],
+                                             class_name, None)
                     if class_instance:
                         obj = class_instance(**value)
                         FileStorage.__objects[key] = obj

@@ -119,7 +119,6 @@ class HBNBCommand(cmd.Cmd):
         """
         args = arg.split()
         all_instances = []
-        # print(args)
 
         # $ all
         if not arg:
@@ -200,8 +199,9 @@ class HBNBCommand(cmd.Cmd):
         print(self.unpacking_storage())
 
     def default(self, line):
-        """Method called on an input line when the command prefix is not recognized.
-        If this method is not overridden, it prints an error message and returns.
+        """Method called on an input line when the command prefix is
+        not recognized. If this method is not overridden,
+        it prints an error message and returns.
         """
         args = line.split(".")
         class_name = args[0]
@@ -213,33 +213,42 @@ class HBNBCommand(cmd.Cmd):
         elif len(args) >= 2 and (args[1].startswith("show(") or
                                  args[1].startswith("destroy(")):
             func_body = args[1].split('(')
-            # print(func_body)
+            print(func_body)
             class_id = func_body[1][1:-2]
-            # print(class_id)
+            print(class_id)
             if args[1].startswith("show("):
                 self.do_show(f"{class_name} {class_id}")
             else:
                 self.do_destroy(f"{class_name} {class_id}")
         elif len(args) >= 2 and args[1].startswith("update("):
             func_body = args[1].split(')')
-            # print(func_body)
             func_content = func_body[0].split("(")
-            # print(func_content)
             attributes_list = func_content[1].split(",")
-            # print(attributes_list)
 
+            dict_attr = ""
+            for i in range(len(attributes_list)):
+                if i:
+                    dict_attr += attributes_list[i]
+                    if i != len(attributes_list) - 1:
+                        dict_attr += ','
             class_id = attributes_list[0][1:-1]
-            attribute_name = attributes_list[1][2:-1]
-            attribute_value = attributes_list[2]
-            # print(attribute_value)
-            # print(type(attribute_value))
             try:
-                attribute_value = int(attribute_value)
-            except ValueError:
-                attribute_value = attributes_list[2][2:-1]
-            # print (type(attribute_value))
-            # print(class_name, class_id, attribute_name, attribute_value)
-            self.do_update(f"{class_name} {class_id} {attribute_name} {attribute_value}")
+                dict_attr = eval(dict_attr)
+                if isinstance(dict_attr, dict):
+                    for key, value in dict_attr.items():
+                        self.do_update(f"{class_name} {class_id} {key} "
+                                       f"{value}")
+                else:
+                    attribute_name = attributes_list[1][2:-1]
+                    attribute_value = attributes_list[2]
+                    try:
+                        attribute_value = int(attribute_value)
+                    except (ValueError, Exception):
+                        attribute_value = attributes_list[2][2:-1]
+                    self.do_update(f"{class_name} {class_id} {attribute_name} "
+                                   f"{attribute_value}")
+            except (NameError, Exception):
+                pass
         else:
             print("*** Unknown syntax: {line}")
 

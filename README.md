@@ -67,10 +67,11 @@ interpreter (`cmd` module) to manipulate our storage engine.
      ```
   - **update**: Updates an instance based on the class name and `id` by adding or updating attribute.
      ```bash
-     # There are 2 ways to do that
+     # There are many ways to do that
     
      $ update <class name> <class id> <attribute name> "<attribute value>"
      $ <class name>.update(<id>, <attribute name>, <attribute value>)
+     $ <class name>.update(<id>, <dictionary representation>)
      ```
   - **count** - retrieve the number of instances of a class.
     ```bash

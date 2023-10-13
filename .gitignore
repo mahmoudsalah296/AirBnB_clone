@@ -5,3 +5,4 @@ __pycache__
 ./models/engine/__pycache__
 push
 file.json
+./models/genterate.sh
