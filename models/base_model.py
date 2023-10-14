@@ -40,8 +40,12 @@ class BaseModel:
 
     def to_dict(self):
         """returns a dictionary containing all keys/value of the instance"""
-        date_dict = self.__dict__.copy()
-        date_dict["__class__"] = self.__class__.__name__
-        date_dict["created_at"] = self.created_at.isoformat()
-        date_dict["updated_at"] = self.updated_at.isoformat()
-        return date_dict
+        attrs = {}
+        attrs["__class__"] = self.__class__.__name__
+        for key, value in self.__dict__.items():
+            if isinstance(value, datetime):
+                # convert datetime to iso format and to a string
+                attrs[key] = str(value.isoformat())
+            else:
+                attrs[key] = value
+        return attrs
