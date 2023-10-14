@@ -19,16 +19,16 @@ class HBNBCommand(cmd.Cmd):
 
     prompt = "(hbnb) "
 
-    def preloop(self):
-        print("hello to our AirBnb clone")
-        print("to clear the terminal press ctrl+l")
+    # def preloop(self):
+    #     print("hello to our AirBnb clone")
+    #     print("to clear the terminal press ctrl+l")
 
-    def postloop(self):
-        print("thank you for using our service, see you soon!")
+    # def postloop(self):
+    #     print("thank you for using our service, see you soon!")
 
     def do_quit(self, line):
         """Quit command to exit the program"""
-        exit()
+        return True
 
     def do_EOF(self, line):
         """exits the program"""
@@ -42,7 +42,8 @@ class HBNBCommand(cmd.Cmd):
     def do_create(self, class_name):
         """creates a new instance of BaseModel,
         saves it to json file,
-        and prints the id"""
+        and prints the id
+        """
         if not class_name or class_name == "":
             print("** class name missing **")
         else:
@@ -65,14 +66,10 @@ class HBNBCommand(cmd.Cmd):
         elif len(args) < 2:
             print("** instance id missing **")
         else:
-            flag = False
-            all_obj = storage.all()
-            for obj_id in all_obj.keys():
-                if args[1] == obj_id.split(".")[1]:
-                    print(all_obj[obj_id])
-                    flag = True
-                    break
-            if flag is False:
+            key = f"{args[0]}.{args[1]}"
+            if key in storage.all():
+                print(storage.all()[key])
+            else:
                 print("** no instance found **")
 
     def unpacking_storage(self):
@@ -88,7 +85,6 @@ class HBNBCommand(cmd.Cmd):
 
     def do_destroy(self, arg):
         """Deletes an instance based on the class name and id"""
-        # $ destroy BaseModel 1234-1234-1234
         args = arg.split()
 
         if not arg:
@@ -152,9 +148,7 @@ class HBNBCommand(cmd.Cmd):
         """Updates an instance based on the class name and id
         by adding or updating attribute
         """
-        # update <class name> <id> <attribute name> "<attribute value>"
         args = arg.split()
-        # print(*args)
 
         if not args:
             print("** class name missing **")
@@ -194,9 +188,9 @@ class HBNBCommand(cmd.Cmd):
         setattr(value_obj, attr_name, attr_value)
         storage.save()
 
-    def do_ls(self, arg):
-        """Display the storage instances name"""
-        print(self.unpacking_storage())
+    # def do_ls(self, arg):
+    #     """Display the storage instances name"""
+    #     print(self.unpacking_storage())
 
     def default(self, line):
         """Method called on an input line when the command prefix is
@@ -213,9 +207,9 @@ class HBNBCommand(cmd.Cmd):
         elif len(args) >= 2 and (args[1].startswith("show(") or
                                  args[1].startswith("destroy(")):
             func_body = args[1].split('(')
-            print(func_body)
+            # print(func_body)
             class_id = func_body[1][1:-2]
-            print(class_id)
+            # print(class_id)
             if args[1].startswith("show("):
                 self.do_show(f"{class_name} {class_id}")
             else:

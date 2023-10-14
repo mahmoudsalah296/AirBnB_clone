@@ -6,6 +6,8 @@ import models
 
 
 class BaseModel:
+    """BaseModel doc string"""
+
     def __init__(self, *args, **kwargs):
         """initialization method"""
         if kwargs:
@@ -40,7 +42,7 @@ class BaseModel:
         attrs = {}
         attrs["__class__"] = self.__class__.__name__
         for key, value in self.__dict__.items():
-            if type(value) == datetime:
+            if isinstance(value, datetime):
                 # convert datetime to iso format and to a string
                 attrs[key] = str(value.isoformat())
             else:

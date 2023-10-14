@@ -6,3 +6,5 @@ __pycache__
 push
 file.json
 ./models/genterate.sh
+test_save_reload_user.py
+test_base_model.py
