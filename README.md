@@ -5,7 +5,7 @@
 </p>
 
 
-## Welcome to the AirBnB clone project
+## Welcome to the AirBnB clone project!
 
 ### First step: a command interpreter to manage our AirBnB objects.
 This is the first step towards building our first full web application: the **AirBnB clone**.
